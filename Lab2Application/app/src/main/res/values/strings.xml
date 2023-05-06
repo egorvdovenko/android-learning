@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Lab 2 Application</string>
+    <string name="Rock_Button_Text">Камень</string>
+    <string name="Scissors_Button_Text">Ножницы</string>
+    <string name="Paper_Button_Text">Бумага</string>
+</resources>
