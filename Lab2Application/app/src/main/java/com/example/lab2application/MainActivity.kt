@@ -103,18 +103,17 @@ class MainActivity : AppCompatActivity() {
     private fun endGame(result: String) {
         showResult(result)
 
-        val restartButton = Button(this)
-        restartButton.text = "Новая игра"
-        restartButton.setOnClickListener {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setOnCancelListener {
             userScore = 0
             computerScore = 0
+            resultTextView.text = getString(R.string.Result_TextView_Text)
+            scoreTextView.text = getString(R.string.Score_TextView_Text)
         }
 
-        val builder = AlertDialog.Builder(this)
         builder.setTitle("Игра окончена")
             .setMessage(result)
-            .setCancelable(false)
-            .setView(restartButton)
             .show()
     }
 }

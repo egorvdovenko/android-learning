@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lab 2 Application</string>
+    <string name="Result_TextView_Text">Новая игра</string>
+    <string name="Score_TextView_Text">Счет: 0:0</string>
 </resources>

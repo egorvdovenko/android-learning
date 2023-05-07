@@ -12,8 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="140dp"
-        android:text="Новая игра"
+        android:fontFamily="sans-serif"
+        android:text="@string/Result_TextView_Text"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +28,7 @@
         android:layout_below="@id/result_text_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Счет: 0:0"
+        android:text="@string/Score_TextView_Text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +36,7 @@
 
     <Button
         android:id="@+id/rock_button"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -42,10 +45,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.App.Button.OutlinedButton.IconOnly" />
+        app:strokeWidth="4dp" />
 
     <Button
         android:id="@+id/scissors_button"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -55,10 +59,11 @@
         app:layout_constraintEnd_toStartOf="@id/paper_button"
         app:layout_constraintStart_toEndOf="@id/rock_button"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.App.Button.OutlinedButton.IconOnly" />
+        app:strokeWidth="4dp" />
 
     <Button
         android:id="@+id/paper_button"
+        style="@style/Widget.App.Button.OutlinedButton.IconOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -67,6 +72,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.App.Button.OutlinedButton.IconOnly" />
+        app:strokeWidth="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
