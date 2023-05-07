@@ -1,15 +1,22 @@
 package com.example.lab2application
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import android.widget.TextView
 
-private lateinit var rock_button: Button
-private lateinit var scissors_button: Button
-private lateinit var paper_button: Button
+enum class SHAPES {
+    ROCK, PAPER, SCISSORS
+}
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var resultTextView: TextView
+    private lateinit var scoreTextView: TextView
+
+    private lateinit var rockButton: Button
+    private lateinit var scissorsButton: Button
+    private lateinit var paperButton: Button
 
     private var userScore = 0
     private var computerScore = 0
@@ -19,40 +26,43 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rock_button = findViewById(R.id.rock_button)
-        scissors_button = findViewById(R.id.scissors_button)
-        paper_button = findViewById(R.id.paper_button)
+        resultTextView = findViewById(R.id.result_text_view)
+        scoreTextView = findViewById(R.id.score_text_view)
 
-        rock_button.setOnClickListener { play(0) }
-        scissors_button.setOnClickListener { play(1) }
-        paper_button.setOnClickListener { play(2) }
+        rockButton = findViewById(R.id.rock_button)
+        scissorsButton = findViewById(R.id.scissors_button)
+        paperButton = findViewById(R.id.paper_button)
+
+        rockButton.setOnClickListener { play(SHAPES.ROCK) }
+        scissorsButton.setOnClickListener { play(SHAPES.SCISSORS) }
+        paperButton.setOnClickListener { play(SHAPES.PAPER) }
     }
 
-    private fun play(userChoice: Int) {
-        val computerChoice = (0..2).random()
+    private fun play(userChoice: SHAPES) {
+        val computerChoice = SHAPES.values().random()
 
         when (userChoice) {
-            0 -> {
+            SHAPES.ROCK -> {
                 when (computerChoice) {
-                    0 -> draw()
-                    1 -> win()
-                    2 -> lose()
+                    SHAPES.ROCK -> draw()
+                    SHAPES.SCISSORS -> win()
+                    SHAPES.PAPER -> lose()
                 }
             }
 
-            1 -> {
+            SHAPES.PAPER -> {
                 when (computerChoice) {
-                    0 -> lose()
-                    1 -> draw()
-                    2 -> win()
+                    SHAPES.PAPER -> draw()
+                    SHAPES.ROCK -> win()
+                    SHAPES.SCISSORS -> lose()
                 }
             }
 
-            2 -> {
+            SHAPES.SCISSORS -> {
                 when (computerChoice) {
-                    0 -> win()
-                    1 -> lose()
-                    2 -> draw()
+                    SHAPES.SCISSORS -> draw()
+                    SHAPES.PAPER -> win()
+                    SHAPES.ROCK -> lose()
                 }
             }
         }
@@ -60,6 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun win() {
         userScore++
+
         if (userScore == maxScore) {
             endGame("Вы победили!")
         } else {
@@ -69,6 +80,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun lose() {
         computerScore++
+
         if (computerScore == maxScore) {
             endGame("Компьютер победил!")
         } else {
@@ -81,12 +93,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showResult(result: String) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+        val resultTextView = findViewById<TextView>(R.id.result_text_view)
+        resultTextView.text = result
+
+        val scoreTextView = findViewById<TextView>(R.id.score_text_view)
+        scoreTextView.text = "Счет: $userScore:$computerScore"
     }
 
     private fun endGame(result: String) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
-        userScore = 0
-        computerScore = 0
+        showResult(result)
+
+        val restartButton = Button(this)
+        restartButton.text = "Новая игра"
+        restartButton.setOnClickListener {
+            userScore = 0
+            computerScore = 0
+        }
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Игра окончена")
+            .setMessage(result)
+            .setCancelable(false)
+            .setView(restartButton)
+            .show()
     }
 }
