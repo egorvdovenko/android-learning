@@ -15,7 +15,6 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.URL
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var exchangeRates: Map<String, Double>
 
@@ -23,18 +22,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val convertButton = findViewById<Button>(R.id.convertButton)
-        convertButton.isEnabled = false
-
-        // Заполнение спиннеров списком валют
         val fromSpinner = findViewById<Spinner>(R.id.fromCurrencySpinner)
         val toSpinner = findViewById<Spinner>(R.id.toCurrencySpinner)
+
+        val convertButton = findViewById<Button>(R.id.convertButton)
+        convertButton.isEnabled = false
 
         // Загрузка курсов валют
         CoroutineScope(Dispatchers.Main).launch {
             try {
                 exchangeRates = fetchExchangeRates()
-                val currencies = exchangeRates.keys.toList()
+                val currencies = exchangeRates.keys.toMutableList()
+
+                // Добавление рубля в список валют
+                currencies.add(0, "RUB")
 
                 // Заполнение спиннеров списком валют
                 val adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, currencies)
