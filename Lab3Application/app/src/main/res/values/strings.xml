@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lab3Application</string>
+    <string name="from_currency_prompt">Выберите валюту для перевода</string>
+    <string name="to_currency_prompt">Выберите валюту, в которую нужно перевести</string>
 </resources>
